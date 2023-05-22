@@ -14,8 +14,8 @@ ALLOW_CONNECTIONS='true'
 ;
 
 --COMENTANDO O BANCO DE DADOS
-COMMENT ON DATABASE uvv IS 'Banco de dados usado para atividades de PSETs';
 
+COMMENT ON DATABASE uvv IS 'Banco de dados usado para atividades de PSETs';
 
 --SELECIONANDO O BANCO DE DADOS DA UVV
 
