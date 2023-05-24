@@ -1,3 +1,11 @@
+--APAGAR O DATABASE SE EXISTIR
+
+DROP DATABASE IF EXISTS uvv;
+
+--APAGAR MEU USUÁRIO SE EXISTIR
+
+DROP USER IF EXISTS rafaelbassul;
+
 --CRIANDO O MEU USUARIO
 
 CREATE USER rafaelbassul WITH SUPERUSER CREATEDB CREATEROLE LOGIN ENCRYPTED PASSWORD 'rafaelbassul';
@@ -14,16 +22,16 @@ ALLOW_CONNECTIONS='true'
 ;
 
 --COMENTANDO O BANCO DE DADOS
-
 COMMENT ON DATABASE uvv IS 'Banco de dados usado para atividades de PSETs';
+
 
 --SELECIONANDO O BANCO DE DADOS DA UVV
 
-\c uvv
+\c "host=localhost dbname=uvv user=rafaelbassul password=rafaelbassul"
 
 --CRIANDO O ESQUEMA
 
-CREATE SCHEMA lojas;
+CREATE SCHEMA lojas AUTHORIZATION rafaelbassul;
 
 --"SETANDO" O ESQUEMA COMO PADRÃO
 
