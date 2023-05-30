@@ -22,8 +22,8 @@ ALLOW_CONNECTIONS='true'
 ;
 
 --COMENTANDO O BANCO DE DADOS
-COMMENT ON DATABASE uvv IS 'Banco de dados usado para atividades de PSETs';
 
+COMMENT ON DATABASE uvv IS 'Banco de dados usado para atividades de PSETs';
 
 --SELECIONANDO O BANCO DE DADOS DA UVV
 
@@ -33,9 +33,9 @@ COMMENT ON DATABASE uvv IS 'Banco de dados usado para atividades de PSETs';
 
 CREATE SCHEMA lojas AUTHORIZATION rafaelbassul;
 
---"SETANDO" O ESQUEMA COMO PADRÃO
+--COMENTANDO O ESQUEMA
 
-set search_path to lojas, "$user", public;
+COMMENT ON SCHEMA lojas IS 'Esquema para o PSET1';
 
 --"SETANDO" O ESQUEMA COMO PADRÃO PARA O USUARIO RAFAELBASSUL 
 
@@ -307,15 +307,28 @@ CHECK (endereco_web IS NOT NULL OR endereco_fisico IS NOT NULL);
 --CRIANDO UMA REGRA QUE ME GARANTE QUE O PREÇO UNITÁRIO NÃO SEJA NEGATIVO
 
 ALTER TABLE lojas.produtos
-ADD CONSTRAINT preco_unitario_nao_negativo
+ADD CONSTRAINT produtos_preco_unitario_nao_negativo
 CHECK (preco_unitario >= 0);
 
 --CRIANDO UMA REGRA QUE ME GARANTE QUE O ESTOQUE NÃO SEJA NEGATIVO
 
 ALTER TABLE lojas.estoques
-ADD CONSTRAINT estoques_nao_negativos
+ADD CONSTRAINT estoques_quantidade_nao_negativo
 CHECK (quantidade >= 0);
 
+-- CRIANDO UMA REGRA QUE ME GARANTE QUE O PREÇO UNITÁRIO NÃO SEJA NEGATIVO
+
+ALTER TABLE lojas.pedidos_itens
+ADD CONSTRAINT pedidos_itens_preco_unitario_nao_negativo
+CHECK (preco_unitario > 0);
+
+-- CRIANDO UMA REGRA QUE ME GARANTE QUE O ESTOQUE NÃO SEJA NEGATIVO
+
+ALTER TABLE lojas.pedidos_itens
+ADD CONSTRAINT pedidos_itens_quantidade_nao_negativo
+CHECK (quantidade >= 0);
+
+-- "SETANDO" EU COMO DONO DAS TABELAS 
 
 ALTER TABLE lojas.clientes
 OWNER TO rafaelbassul;
